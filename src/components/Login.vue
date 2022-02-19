@@ -8,12 +8,12 @@
       <!-- 登陆表单区 -->
       <el-form ref="loginFormRef" :model='loginForm' :rules='loginFormRules' label-width="0px" class="login_form">
         <!-- 用户名 -->
-        <el-form-item  prop="username">
+        <el-form-item  prop="username">  <!--注意是在item项中用prop绑定验证规则对象中的校验字段-->
           <el-input v-model="loginForm.username"  prefix-icon="el-icon-user-solid"></el-input>
         </el-form-item>
         <!-- 密码 -->
         <el-form-item prop='password'>
-          <el-input show-password v-model="loginForm.password" prefix-icon="el-icon-lock"></el-input>
+          <el-input show-passwor vd v-model="loginForm.password" prefix-icon="el-icon-lock"></el-input>
         </el-form-item>
         <!-- 按钮 -->
         <el-form-item class="btns">
@@ -29,11 +29,14 @@
 export default {
     data(){
         return {
+          //登录表单的数据绑定对象
             loginForm:{
             username:"admin",
             password:"123456"
         },
+        //表单的验证规则对象
         loginFormRules:{
+            //验证用户名是否合法
                username:[ { required: true, message: '请输入用户名称', trigger: 'blur' },
             { min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }],
                password:[ { required: true, message: '请输入登录密码', trigger: 'blur' },
@@ -42,6 +45,7 @@ export default {
     }
     },
     methods:{
+      //重置表单
       resetLoginForm(){
             this.$refs.loginFormRef.resetFields();
       },
