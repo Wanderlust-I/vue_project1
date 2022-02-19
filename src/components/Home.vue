@@ -1,12 +1,4 @@
 <template>
-<<<<<<< HEAD
-  <div>
-    <el-button type="info" @click="logout">退出</el-button>
-  </div>
-</template>
-<script>
-export default {
-=======
   <el-container class="home-container">
     <!-- 头部区域 -->
     <el-header>
@@ -77,19 +69,11 @@ export default {
     this.getMenulist();
     this.activePath=window.sessionStorage.getItem('activePath')
   },
->>>>>>> ad1dd2c7fd35baebdecd6cde148c8e0f7537ceb5
   methods: {
     logout() {
       window.sessionStorage.clear();
       this.$router.push("/login");
     },
-<<<<<<< HEAD
-  },
-}; 
-</script>
-
-<style lang="less" scoped>
-=======
     async getMenulist() {
       const { data: res } = await this.$http.get("menus");
       if (res.meta.status !== 200) this.$message.error(res.meta.msg);
@@ -139,5 +123,5 @@ this.isCollapse=!this.isCollapse;
   letter-spacing: 3px;  //设置字符间空白
   cursor: pointer;
 }
->>>>>>> ad1dd2c7fd35baebdecd6cde148c8e0f7537ceb5
+
 </style>

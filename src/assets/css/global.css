@@ -4,8 +4,6 @@ body,
     height: 100%;
     margin: 0;
     padding: 0;
-<<<<<<< HEAD
-=======
 }
 .el-breadcrumb{
     margin-bottom: 20px;
@@ -18,5 +16,5 @@ body,
 }
 .el-pagination{
     margin-top: 15px;
->>>>>>> ad1dd2c7fd35baebdecd6cde148c8e0f7537ceb5
+
 }
