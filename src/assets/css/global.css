@@ -4,4 +4,19 @@ body,
     height: 100%;
     margin: 0;
     padding: 0;
+<<<<<<< HEAD
+=======
+}
+.el-breadcrumb{
+    margin-bottom: 20px;
+}
+.el-card{
+    box-shadow:0 1px 1px 0px  !important;
+}
+.el-table{
+    margin-top: 15px;
+}
+.el-pagination{
+    margin-top: 15px;
+>>>>>>> ad1dd2c7fd35baebdecd6cde148c8e0f7537ceb5
 }
