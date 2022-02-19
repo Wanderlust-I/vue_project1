@@ -1,17 +1,10 @@
 import Vue from 'vue'
-<<<<<<< HEAD
-import { Button,Form,FormItem,Input,Message } from 'element-ui'
-=======
 import { Button,Form,FormItem,Input,Message,Container,Header,Aside,Main,Menu,Submenu,MenuItem,Breadcrumb,BreadcrumbItem,Card,
 Row,Col,Table,TableColumn,Switch,Tooltip,Pagination,Dialog,MessageBox} from 'element-ui'
->>>>>>> ad1dd2c7fd35baebdecd6cde148c8e0f7537ceb5
 Vue.use(Button)
 Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Input)
-<<<<<<< HEAD
-Vue.prototype.$message=Message
-=======
 Vue.use(Container)
 Vue.use(Header)
 Vue.use(Aside)
@@ -32,4 +25,4 @@ Vue.use(Pagination)
 Vue.use(Dialog)
 Vue.prototype.$message=Message
 Vue.prototype.$confirm=MessageBox.confirm
->>>>>>> ad1dd2c7fd35baebdecd6cde148c8e0f7537ceb5
+
