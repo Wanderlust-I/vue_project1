@@ -176,7 +176,6 @@ parentCateChange(){
   },
   addCate() {
     //点击确定，完成添加分类
-    console.log(this.addCateForm)
     this.$refs.addCateFormRef.validate(async valid => {
       if (!valid) return
       //发送请求完成添加分类
