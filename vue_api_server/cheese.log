@@ -528,3 +528,11 @@
 [2022-04-05T11:14:32.538] [DEBUG] cheese - admin
 [2022-04-05T11:14:32.572] [DEBUG] cheese - null
 [2022-04-05T11:14:32.573] [DEBUG] cheese - null
+[2022-04-06T10:44:14.489] [DEBUG] cheese - login => username:admin,password:123456
+[2022-04-06T10:44:14.491] [DEBUG] cheese - admin
+[2022-04-06T10:44:14.524] [DEBUG] cheese - null
+[2022-04-06T10:44:14.525] [DEBUG] cheese - null
+[2022-04-06T16:30:14.352] [DEBUG] cheese - login => username:admin,password:123456
+[2022-04-06T16:30:14.355] [DEBUG] cheese - admin
+[2022-04-06T16:30:14.360] [DEBUG] cheese - null
+[2022-04-06T16:30:14.360] [DEBUG] cheese - null
