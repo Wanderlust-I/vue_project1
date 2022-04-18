@@ -43,6 +43,7 @@
               size="mini"
               type="primary"
               icon="el-icon-edit"
+             @click="showEditDialog(scope.row.goods_id)"
             ></el-button>
             <el-button
               size="mini"
@@ -66,6 +67,26 @@
       >
       </el-pagination>
 </el-card>
+
+<el-dialog title="修改商品" :visible.sync="editDialogVisible" width="40%">
+      <el-form :model="editGoodsForm" :rules="editFormRules" ref="editFormRef" label-width="100px">
+        <el-form-item label="商品名称" prop="goods_name">
+          <el-input v-model="editGoodsForm.goods_name"></el-input>
+        </el-form-item>
+        <el-form-item label="价格" prop="goods_price">
+          <el-input v-model="editGoodsForm.goods_price"></el-input>
+        </el-form-item>
+           <el-form-item label="重量" prop="goods_weight">
+          <el-input v-model="editGoodsForm.goods_weight"></el-input>
+        </el-form-item>
+      </el-form>
+        <span slot="footer" class="dialog-footer">
+        <el-button @click="editDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="editFormInfo">确 定</el-button>
+      </span>
+      </el-dialog>
+
+
     </div>
 </template>
 
@@ -80,7 +101,10 @@ export default {
         pagesize: 10
       },
       goodslist: [],
-      total: 0
+      total: 0,
+      editDialogVisible:false,
+      editGoodsForm:''
+
         }
     },
     created(){
@@ -129,8 +153,34 @@ handleSizeChange(newsize){
     },
     goAddPage(){
         this.$router.push('goods/add')
-    }
-    
+    },
+   async showEditDialog(id) {
+       
+      const { data: res } = await this.$http.get(`goods/`+id)
+      if (res.meta.status !== 200) {
+        return this.$message.error('查询商品数据失败~')
+      }
+      this.editGoodsForm = res.data
+    this.editDialogVisible = true
+      return this.$message.success('查询商品数据成功~')
+    },
+    editFormInfo() {
+      this.$refs.editFormRef.validate(valid => {
+        if (!valid) return
+        this.$http
+          .put(`goods/`+this.editGoodsForm.goods_id ,
+          this.editGoodsForm
+          )
+          .then(res => {
+            if (res.data.meta.status !== 200) {
+              return this.$message.error('修改商品失败!')
+            }
+            this.$message.success('修改商品成功!')
+            this.getGoodsList()
+          })
+        this.editDialogVisible = false
+      })
+    },
     }
 }
 </script>

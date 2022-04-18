@@ -12,6 +12,7 @@ import GoodsList from "../components/goods/List.vue"
 import Add from '../components/goods/Add.vue'
 import Order from '../components/order/Order.vue'
 import Report from '../components/report/Report.vue'
+import router from '../router/index.js'
 
 Vue.use(VueRouter)
 const routes = [
@@ -30,9 +31,9 @@ const routes = [
 {path:'/reports',component:Report}
 ]}
 ]
-const router = new VueRouter({
-  routes
-})
+// const router = new VueRouter({
+//   routes
+// })
 
 //挂载路由导航守卫
     router.beforeEach((to,from,next)=>{

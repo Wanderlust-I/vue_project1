@@ -29,8 +29,11 @@
   </template>
 <!-- 操作 -->
 <template slot="opt" slot-scope="scope">
-  <el-button size="mini" type="primary" icon="el-icon-edit">编辑</el-button>
-  <el-button size="mini" type="danger" icon="el-icon-delete">删除</el-button> 
+    <el-button type="primary" icon="el-icon-edit" size="mini" @click="showEditCateDialog(scope.row.cat_id)">
+    </el-button>
+    <el-button type="danger" icon="el-icon-delete" size="mini" @click="removeCate(scope.row.cat_id)">
+    </el-button>
+
   </template>
 </tree-table>
 <!-- 分页 -->
@@ -57,6 +60,25 @@
   </span>
 </el-form-item>
 </el-dialog>
+
+
+ <el-dialog title="编辑分类" :visible.sync="editCateDialogVisible" width="50%">
+    <el-form
+             :model="editCateForm"
+             :rules="editCateFormRules"
+             ref="editCateFormRef"
+             label-width="100px"
+             >
+        <el-form-item label="分类名称：" prop="cat_name">
+            <el-input v-model="editCateForm.cat_name"></el-input>
+        </el-form-item>
+    </el-form>
+    <span slot="footer" class="dialog-footer">
+        <el-button @click="editCateDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="eidtCate">确 定</el-button>
+    </span>
+</el-dialog>
+
  </div>
 </template>
 
@@ -105,9 +127,16 @@ cascaderProps:{
   expandTrigger:'hover'
 },
 //绑定用户选择的分类值
-selectedKeys:[]
+selectedKeys:[],
+editCateDialogVisible: false,
+editCateFormRules: {
+    cat_name: [
+        {required: true, message: '请输入分类名称', trigger: 'blur'}
+    ]
+},
+editCateForm: ''
              }
-        },
+},
    created(){
 this.getCateList();
         },
@@ -192,9 +221,46 @@ parentCateChange(){
       this.getCateList()
       this.addCateDialogVisible = false
     })
-  }
+  },
+ async showEditCateDialog(id) {
+    const {data: res} = await this.$http.get('categories/' + id)
+    if (res.meta.status !== 200) return this.$message.error('获取分类失败！')
+    this.editCateForm = res.data
+    this.editCateDialogVisible = true
+},
+eidtCate() {
+    this.$refs.editCateFormRef.validate(async valid => {
+        if (!valid) return
+        const {data: res} = await this.$http.put('categories/' + this.editCateForm.cat_id, {cat_name: this.editCateForm.cat_name})
+        if (res.meta.status !== 200) return this.$message.error('更新分类名失败！')
+        this.$message.success('更新分类名成功！')
+        this.getCateList()
+        this.editCateDialogVisible = false
+    })
+},
+
+
+  async removeCate(id) {
+      const confirRustle = await this.$confirm('此操作将永久删除该文件, 是否继续?', '删除分类', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).catch(err => err)
+
+      if (confirRustle !== 'confirm') {
+        return this.$message.info('已取消删除操作!')
+      }
+
+      const { data: res } = await this.$http.delete('categories/' + id)
+      if (res.meta.status !== 200) {
+        return this.$message.error('分类删除失败!')
+      }
+      this.$message.success('该分类已经成功删除!')
+      this.getCateList()
+    }
   }
         }
+    
     
 </script>
 
